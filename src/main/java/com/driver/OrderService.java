@@ -1,26 +1,34 @@
 package com.driver;
 
-import org.springframework.plugin.core.OrderAwarePluginRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+@Service
 public class OrderService {
+//    @Autowired
+//    OrderRepository orderRepository;
 
     OrderRepository orderRepository = new OrderRepository();
 
-    public void addOrder(Order order)
-    {
+
+    public void addOrder(Order order){
         orderRepository.addOrder(order);
     }
-    public void addPartner(String id){
-        orderRepository.addPartner(id);
+
+    public void addPartner(String partnerId){
+        orderRepository.addPartner(partnerId);
     }
 
-    public void addOrderPartnerPair(String orderId,String partnerId){
+    public void addOrderPartnerPair(String orderId, String partnerId){
         orderRepository.addOrderPartnerPair(orderId,partnerId);
     }
 
-    public Order getByOrderId(String orderId){
+    public Order getOrderById(String orderId){
         return orderRepository.getOrderById(orderId);
     }
 
@@ -28,7 +36,7 @@ public class OrderService {
         return orderRepository.getPartnerById(partnerId);
     }
 
-    public Integer getOrderCountByPartnerId(String partnerId){
+    public int getOrderCountByPartnerId(String partnerId){
         return orderRepository.getOrderCountByPartnerId(partnerId);
     }
 
@@ -36,20 +44,23 @@ public class OrderService {
         return orderRepository.getOrdersByPartnerId(partnerId);
     }
 
-    public List<String> getAllOrder(){
+    public List<String> getAllOrders() {
         return orderRepository.getAllOrders();
     }
 
-    public int getCountOfUnassignedOrder(){
+    public int getCountOfUnassignedOrders(){
         return orderRepository.getCountOfUnassignedOrders();
     }
 
-    public int getOrdersLeftAfterTime(String time,String partnerId){
-        return orderRepository.getOrdersLeftAfterGivenTimeByPartnerId(time, partnerId);
+    public int getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId){
+        return orderRepository.getOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
     }
 
-    public String getLastDeliveryTime(String partnerId){
+    public String getLastDeliveryTimeByPartnerId(String partnerId){
         return orderRepository.getLastDeliveryTimeByPartnerId(partnerId);
+
+
+
     }
 
     public void deletePartnerById(String partnerId){
